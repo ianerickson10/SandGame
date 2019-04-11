@@ -84,7 +84,7 @@ public class SandLab
 	  {
 		  for (int cols = 0; cols < grid[0].length; cols++)
 		  {
-				if (grid[row][cols] == SAND)
+				if (grid[row][cols] == SAND && row < grid.length && cols < grid[0].length)
 			    {
 			    	if (grid[row][cols + 1] == EMPTY && row < grid.length && cols < grid[0].length)
 			    	{
