@@ -1,3 +1,5 @@
+package SandGame;
+
 import java.awt.*;
 import java.util.*;
 
@@ -7,6 +9,7 @@ public class SandLab
   //add constants for particle types here
   public static final int EMPTY = 0;
   public static final int METAL = 1;
+  public static final int SAND = 2;
   
   //do not add any more fields below
   private int[][] grid;
@@ -23,10 +26,11 @@ public class SandLab
     String[] names;
     // Change this value to add more buttons
     //Step 4,6
-    names = new String[2];
+    names = new String[3];
     // Each value needs a name for the button
     names[EMPTY] = "Empty";
     names[METAL] = "Metal";
+    names[SAND] = "Sand";
     
     //1. Add code to initialize the data member grid with same dimensions
     grid = new int[numRows][numCols];
@@ -46,7 +50,24 @@ public class SandLab
   {
       //Step 3
    //Hint - use a nested for loop
-	  
+	  for (int row = 0; row < grid.length; row++)
+	  {
+		  for (int cols = 0; cols < grid[0].length; cols++)
+		  {
+			  if (grid[row][cols] == EMPTY)
+			  {
+				  display.setColor(row, cols, Color.black);
+			  }
+			  else if (grid[row][cols] == METAL)
+			  {
+				  display.setColor(row, cols, Color.GRAY);
+			  }
+			  else if (grid[row][cols] == SAND)
+			  {
+				  display.setColor(row, cols, new Color(237, 192, 116));
+			  }
+		  }
+	  }
   }
 
   //Step 5,7
@@ -59,6 +80,20 @@ public class SandLab
     //int someRandom = (int) (Math.random() * scalar)
     //remember that you need to watch for the edges of the array
     
+	  for (int row = 0; row < grid.length; row++)
+	  {
+		  for (int cols = 0; cols < grid[0].length; cols++)
+		  {
+				if (grid[row][cols] == SAND)
+			    {
+			    	if (grid[row][cols + 1] == EMPTY && row < grid.length && cols < grid[0].length)
+			    	{
+			    		grid[row][cols + 1] = SAND;
+			    		grid[row][cols - 1] = EMPTY;
+			    	}
+			    }
+		  }
+	  }
     
   }
   
